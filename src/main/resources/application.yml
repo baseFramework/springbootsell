@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 12345678
+    url: jdbc:mysql://127.0.0.1/sell?characterEncoding=utf-8&useSSL=false
+  jba:
+    show-sql: true
+server:
+  port: 8082
+  context-path: /sell
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+#  file: /Users/mac/workplace/javapro/springboot/springbootsell/logs/sell.log
+#  level: debug
