@@ -1,28 +1,21 @@
-package com.demo.sell.dataobject;
+package com.demo.sell.dto;
 
+import com.demo.sell.dataobject.OrderDetail;
 import com.demo.sell.enums.OrderStatusEnum;
 import com.demo.sell.enums.PayStatusEnum;
 import lombok.Data;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
-@DynamicUpdate
-@DynamicInsert
-public class OrderMaster {
+public class OrderDTO {
 
     /**
      * 订单ID
      */
-    @Id
     private String orderId;
 
     /**
@@ -70,4 +63,8 @@ public class OrderMaster {
      */
     private Date updateTime;
 
+    /**
+     * 订单详情列表数据
+     */
+    private List<OrderDetail>  orderDetailList;
 }
