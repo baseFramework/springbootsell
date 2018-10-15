@@ -1,5 +1,6 @@
 package com.demo.sell.service.impl;
 
+import com.demo.sell.converter.OrderMaster2OrderDTOConverter;
 import com.demo.sell.dataobject.OrderDetail;
 import com.demo.sell.dataobject.OrderMaster;
 import com.demo.sell.dataobject.ProductInfo;
@@ -18,9 +19,11 @@ import com.demo.sell.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -40,6 +43,11 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMasterRepository orderMasterRepository;
 
+    /**
+     * 创建订单
+     * @param orderDTO
+     * @return
+     */
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
@@ -91,14 +99,42 @@ public class OrderServiceImpl implements OrderService {
         return orderDTO;
     }
 
+    /**
+     * 查询订单
+     * @param orderId
+     * @return
+     */
     @Override
     public OrderDTO findOne(String orderId) {
-        return null;
+
+        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        if(orderMaster ==  null){
+            throw  new SellException(ResultEnum.ORDER_NOT_EXIST);
+        }
+
+       List<OrderDetail> orderDetailList =  orderDetailRepository.findByOrderId(orderId);
+        if(CollectionUtils.isEmpty(orderDetailList)){
+            throw  new SellException(ResultEnum.ORDERDETAIL_NOT_EXIST);
+        }
+
+        OrderDTO orderDTO = new OrderDTO();
+        BeanUtils.copyProperties(orderMaster,orderDTO);
+        orderDTO.setOrderDetailList(orderDetailList);
+        return orderDTO;
     }
 
+    /**
+     * 获取订单列表
+     * @param buyerOpenid
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
-        return null;
+        Page<OrderMaster> orderMasterList = orderMasterRepository.findByBuyerOpenid(buyerOpenid,pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterList.getContent());
+        Page<OrderDTO> orderDTOPage = new PageImpl<OrderDTO>(orderDTOList,pageable,orderMasterList.getTotalElements());
+        return orderDTOPage;
     }
 
     @Override
