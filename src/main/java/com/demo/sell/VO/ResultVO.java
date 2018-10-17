@@ -1,5 +1,6 @@
 package com.demo.sell.VO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.management.timer.Timer;
@@ -11,6 +12,7 @@ import static javafx.scene.input.KeyCode.T;
  */
 
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultVO<T> {
 
     /**
