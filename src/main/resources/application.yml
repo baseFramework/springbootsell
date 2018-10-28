@@ -16,3 +16,7 @@ server:
 #    console: "%d - %msg%n"
 #  file: /Users/mac/workplace/javapro/springboot/springbootsell/logs/sell.log
 #  level: debug
+
+wechat:
+  mpAppid: wx199c36f84e8b28fb
+  mpAppSecret: 740573d44c1700eb731164914ffd678c
