@@ -25,6 +25,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/buyer/order")
 @Slf4j
+@CrossOrigin
 public class BuyerOrderController {
 
     @Autowired

@@ -10,10 +10,7 @@ import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sun.rmi.runtime.Log;
 
 import java.net.URLEncoder;
@@ -21,6 +18,7 @@ import java.net.URLEncoder;
 @Controller
 @RequestMapping("/wechat")
 @Slf4j
+@CrossOrigin
 public class WechatController {
 
     @Autowired
@@ -31,7 +29,7 @@ public class WechatController {
 
         //1.配置
         //2.调用方法
-        String url = "http://sellvita.natapp1.cc/wechat/userInfo";
+        String url = "http://sellvita.natapp1.cc/sell/wechat/userInfo";
         String redirectUrl =  wxMpService.oauth2buildAuthorizationUrl(url,WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】获取code, result={}",redirectUrl);
 
