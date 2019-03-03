@@ -24,7 +24,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 路径 -->
             <fileNamePattern>
-                /Users/mac/workplace/javapro/springboot/springbootsell/logs/info.%d.log
+                /Users/rahul/workspace/springpro/springbootsell/logs/info.%d.log
             </fileNamePattern>
         </rollingPolicy>
     </appender>
@@ -42,7 +42,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 路径 -->
             <fileNamePattern>
-                /Users/mac/workplace/javapro/springboot/springbootsell/logs/error.%d.log
+                /Users/rahul/workspace/springpro/springbootsell/logs/error.%d.log
             </fileNamePattern>
         </rollingPolicy>
     </appender>
